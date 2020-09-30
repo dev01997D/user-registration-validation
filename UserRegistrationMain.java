@@ -11,20 +11,21 @@ public class UserRegistrationMain {
 
 		//Taking input from user
 		Scanner sc=new Scanner(System.in);
-		System.out.println("Enter your Password here:");
+		System.out.println("Enter your Email Id here:");
 		String phone=sc.nextLine();
 
 		//Generating pattern   
-		String pattern="(?=.*[A-Z])(?=.*\\d)([a-zA-Z0-9_]|[^a-zA-Z0-9_]){8,}$";
+		//String pattern="^[a-zA-Z0-9_+&-]+(?:\\\\.[a-zA-Z0-9_+&-]+)*@(?:[a-zA-Z0-9-]+\\\\.)+[a-zA-Z]{2,7}$";
+		String pattern="^(abc)+(((\\.[0-9])|(\\-[0-9])|[0-9]){0,})@[a-z0-9]{1,}(.)(([a-z0-9]{2,}(.))|([a-z0-9]{2,}(,)))[a-z0-9]{2,}";
 		Pattern namePattern=Pattern.compile(pattern);
 		Matcher phoneNo=namePattern.matcher(phone);
 
 		if(phoneNo.matches())
 		{
-			System.out.println("Password accepted");
+			System.out.println("The email provided is valid one. Thank You!");
 		}
 		else
-			System.out.println("Invalid Password. Plz try again!");
+			System.out.println("The email is not valid address. Plz try again!");
 	}
 
 }
