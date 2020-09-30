@@ -7,27 +7,27 @@ public class UserRegistrationMain {
 
 	public static void main(String[] args) {
 		// TODO Auto-generated method stub
-
 		System.out.println("Welcome to User Registration Validation Problem");
-		Scanner sc=new Scanner(System.in);
 
-		System.out.println("Enter the user First Name:");
-		String firstName=sc.next();
-		System.out.println("Enter the User Last Name:");
-		String lastName=sc.next();
-		
-		//Generating pattern
-		String pattern="^[A-Z][a-z]{2,}$";
+		//Taking input from user
+		Scanner sc=new Scanner(System.in);
+		System.out.println("Enter the user Email:");
+		String email=sc.next();
+
+		//Generating pattern   
+		String pattern="^abc.(xyz|in)@bl.co.(xyz|in)$";
 		Pattern namePattern=Pattern.compile(pattern);
-		Matcher fName=namePattern.matcher(firstName);
-		Matcher lName=namePattern.matcher(lastName);
-		
-		
-		if(fName.matches() && lName.matches()) {
-			System.out.println("Welcome, "+firstName+" "+lastName);
+		Matcher emailId=namePattern.matcher(email);
+
+		int positionOfAt=email.indexOf('@');
+		int lastIndexDot=email.lastIndexOf('.');
+
+		if(emailId.matches()  && (lastIndexDot-positionOfAt>=2))
+		{
+			System.out.println("Valid email id");
 		}
 		else
-			System.out.println("Invalid User Name, first and last name should start with capital letter and have minimum 3 characters. Please try again!");
+			System.out.println("Invalid Email Id. Plz try again!");
 	}
 
 }
