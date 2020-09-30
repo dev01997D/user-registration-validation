@@ -11,20 +11,20 @@ public class UserRegistrationMain {
 
 		//Taking input from user
 		Scanner sc=new Scanner(System.in);
-		System.out.println("Enter the user Phone Number:");
+		System.out.println("Enter your Password here:");
 		String phone=sc.nextLine();
 
 		//Generating pattern   
-		String pattern="^[0-9]{2}(\\s)[7-9][0-9]{9}$";
+		String pattern="([a-zA-Z0-9_]|[^a-zA-Z0-9_]){8,}$";//^a-zA-Z0-9_   a-zA-Z0-9_
 		Pattern namePattern=Pattern.compile(pattern);
 		Matcher phoneNo=namePattern.matcher(phone);
 
 		if(phoneNo.matches())
 		{
-			System.out.println("Valid Phone Number");
+			System.out.println("Password accepted");
 		}
 		else
-			System.out.println("Invalid Phone Number. Plz try again!");
+			System.out.println("Invalid Password. Plz try again!");
 	}
 
 }
