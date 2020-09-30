@@ -11,23 +11,20 @@ public class UserRegistrationMain {
 
 		//Taking input from user
 		Scanner sc=new Scanner(System.in);
-		System.out.println("Enter the user Email:");
-		String email=sc.next();
+		System.out.println("Enter the user Phone Number:");
+		String phone=sc.nextLine();
 
 		//Generating pattern   
-		String pattern="^abc.(xyz|in)@bl.co.(xyz|in)$";
+		String pattern="^[0-9]{2}(\\s)[7-9][0-9]{9}$";
 		Pattern namePattern=Pattern.compile(pattern);
-		Matcher emailId=namePattern.matcher(email);
+		Matcher phoneNo=namePattern.matcher(phone);
 
-		int positionOfAt=email.indexOf('@');
-		int lastIndexDot=email.lastIndexOf('.');
-
-		if(emailId.matches()  && (lastIndexDot-positionOfAt>=2))
+		if(phoneNo.matches())
 		{
-			System.out.println("Valid email id");
+			System.out.println("Valid Phone Number");
 		}
 		else
-			System.out.println("Invalid Email Id. Plz try again!");
+			System.out.println("Invalid Phone Number. Plz try again!");
 	}
 
 }
