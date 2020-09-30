@@ -15,7 +15,7 @@ public class UserRegistrationMain {
 		String phone=sc.nextLine();
 
 		//Generating pattern   
-		String pattern="([a-zA-Z0-9_]|[^a-zA-Z0-9_]){8,}$";//^a-zA-Z0-9_   a-zA-Z0-9_
+		String pattern="(?=.*[A-Z])([a-zA-Z0-9_]|[^a-zA-Z0-9_]){8,}$";//^a-zA-Z0-9_   a-zA-Z0-9_
 		Pattern namePattern=Pattern.compile(pattern);
 		Matcher phoneNo=namePattern.matcher(phone);
 
