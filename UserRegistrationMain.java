@@ -12,19 +12,19 @@ public class UserRegistrationMain {
 		//Taking input from user
 		Scanner sc=new Scanner(System.in);
 		System.out.println("Enter your Password here:");
-		String phone=sc.nextLine();
+		String password=sc.nextLine();
 
-		//Generating pattern   
-		String pattern="(?=.*[A-Z])(?=.*\\d)([a-zA-Z0-9_]|[^a-zA-Z0-9_]){8,}$";
-		Pattern namePattern=Pattern.compile(pattern);
-		Matcher phoneNo=namePattern.matcher(phone);
+		//Generating pattern  
+		String pattern="(?=.*[A-Z])(?=.*[a-z])(?=.*\\d)(?=.*[^a-zA-Z0-9_])([a-zA-Z0-9_]|[^a-zA-Z0-9_]){8,}";
+		Pattern namePattern=Pattern.compile(pattern);   //
+		Matcher passwordMatcher=namePattern.matcher(password);
 
-		if(phoneNo.matches())
+		if(passwordMatcher.matches())
 		{
-			System.out.println("Password accepted");
+			System.out.println("The Password is accepted!. Thank You!");
 		}
 		else
-			System.out.println("Invalid Password. Plz try again!");
+			System.out.println("The Password is not valid! It should follow the patterns. Plz try again!");
 	}
 
 }
