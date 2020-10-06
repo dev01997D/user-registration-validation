@@ -12,126 +12,86 @@ public class UserRegistration {
 	private final static String PHONE_NUMBER_PATTERN = "^[0-9]{2}(\\s)[7-9][0-9]{9}$";
 	private final static String PASSWORD_PATTERN = "(?=.*[A-Z])(?=.*[a-z])(?=.*\\d)(?=.*[^a-zA-Z0-9_])([a-zA-Z0-9_]|[^a-zA-Z0-9_]){8,}";
 
-	public boolean firstNameValidation(String firstName) throws UserInvalidDetailsException{
-		Pattern pattern = Pattern.compile(FIRST_NAME_PATTERN);
-		Matcher m = pattern.matcher(firstName);
-		if(m.matches()) {
-			return true;
-		}
-		else {
-			throw new UserInvalidDetailsException("Invalid First Name");
-		}
-	}
-	public boolean lastNameValidation(String lastName) throws UserInvalidDetailsException{
-		Pattern pattern = Pattern.compile(LAST_NAME_PATTERN);
-		Matcher m = pattern.matcher(lastName);
-		if(m.matches()) {
-			return true;
-		}
-		else {
-			throw new UserInvalidDetailsException("Invalid Last Name");
-		}
-	}
-	public boolean phoneNumberValidation(String phoneNo) throws UserInvalidDetailsException{
-			Pattern pattern = Pattern.compile(PHONE_NUMBER_PATTERN);
-			Matcher m = pattern.matcher(phoneNo);
-			if(m.matches()) {
-				return true;
-			}
-			else {
-				throw new UserInvalidDetailsException("Invalid Phone Number"); 
-			}
-	}
-	public boolean passwordValidation(String password) throws UserInvalidDetailsException{
-
-			Pattern pattern = Pattern.compile(PASSWORD_PATTERN);
-			Matcher m = pattern.matcher(password);
-			if(m.matches()) {
-				return true;
-			}
-			else {
-				throw new UserInvalidDetailsException("Invalid Password!"); 
-			}
-	}
-
-	public boolean emailValidation(String email) throws UserInvalidDetailsException{
-			Pattern pattern = Pattern.compile(EMAIL_PATTERN);
-			Matcher m = pattern.matcher(email);
-			if(m.matches()) {
-				return true;
-			}
-			else {
-				throw new UserInvalidDetailsException("Invalid Email provided"); 
-			}
+	@FunctionalInterface
+	public interface ValidateDetails {
+		public boolean validateDetails(String detail);
 	}
 
 	public static void main(String[] args) {
-		boolean match = false;
-		UserRegistration user = new UserRegistration();
 		// Display Message
-		System.out.println("User Registration");
+		System.out.println("Welcome to User Registration");
 
 		Scanner sc = new Scanner(System.in);
-		// First Name User Input
-
-		try {
-			System.out.println("Enter Your First Name for User Registration :");
-			String firstName = sc.next();
-			match = user.firstNameValidation(firstName);
-			if(match)
-				System.out.println("First Name : "+firstName);
-		}
-		catch(UserInvalidDetailsException e) {
-			e.getMessage();
-		}
-		// Last Name User Input
-		try {
+		
+		//First Name Validation Using Lambda Expression
+		System.out.println("Enter Your First Name for User Registration :");
+		String firstName = sc.nextLine();
+		ValidateDetails firstNameObj = (firstNamePassed) -> {
+			if (firstNamePassed.matches(FIRST_NAME_PATTERN))
+				return true;
+			else
+				return false;
+		};
+		if (firstNameObj.validateDetails(firstName))
+			System.out.println("First Name : " + firstName);
+		else
+			System.out.println("Enter correct First name");
+		
+		//Last Name Validation Using Lambda Expression
 		System.out.println("Enter Your Last Name for User Registration :");
-		String lastName = sc.next();
-		match = user.lastNameValidation(lastName);
-		if(match)
-			System.out.println("Last Name : "+lastName);
-		}
-		catch(UserInvalidDetailsException e) {
-			e.getMessage();
-		}
-
-		// Email User Input
-		try {
+		String lastName = sc.nextLine();
+		ValidateDetails lastNameObj = (lastNamePassed) -> {
+			if (lastNamePassed.matches(LAST_NAME_PATTERN))
+				return true;
+			else
+				return false;
+		};
+		if (lastNameObj.validateDetails(lastName))
+			System.out.println("Last Name : " + firstName);
+		else
+			System.out.println("The pattern of Last Name is incorrect. Please try again!");
+		
+		//Email Id Validation Using Lambda Expression
 		System.out.println("Enter Your Email ID for User Registration :");
-		String email = sc.next();
-		sc.nextLine();
-		match = user.emailValidation(email);
-		if(match)
-			System.out.println("Email : "+email);
-		}
-		catch(UserInvalidDetailsException e) {
-			e.getMessage();
-		}
-
-		// Phone Number User Input
-		try {
+		String emailId = sc.nextLine();
+		ValidateDetails emailIdObj = (emailIdPassed) -> {
+			if (emailIdPassed.matches(EMAIL_PATTERN))
+				return true;
+			else
+				return false;
+		};
+		if (emailIdObj.validateDetails(emailId))
+			System.out.println("Entered email id is : " + emailId);
+		else
+			System.out.println("The pattern of Email Id is incorrect. Please try again!");
+		
+		//Phone Number Validation Using Lambda Expression
 		System.out.println("Enter Your Phone Number for User Registration :");
 		String phoneNo = sc.nextLine();
-		match = user.phoneNumberValidation(phoneNo);
-		if(match)
-			System.out.println("Phone Number : "+phoneNo);
-		}
-		catch(UserInvalidDetailsException e) {
-			e.getMessage();
-		}
-
-		// Password User Input
-		try {
+		ValidateDetails phoneNoObj = (phoneNoPassed) -> {
+			if (phoneNoPassed.matches(PHONE_NUMBER_PATTERN))
+				return true;
+			else
+				return false;
+		};
+		if (phoneNoObj.validateDetails(phoneNo))
+			System.out.println("Your Phone Number provided is : " + phoneNo);
+		else
+			System.out.println("The pattern of Phone Number is incorrect. Please try again!");
+		
+		//Password Validation Using Lambda Expression
 		System.out.println("Enter Your Password for User Registration :");
-		String password = sc.next();
-		match = user.passwordValidation(password);
-		if(match)
-			System.out.println("Password : "+password);
-		}
-		catch(UserInvalidDetailsException e) {
-			e.getMessage();
-		}
+		String password = sc.nextLine();
+		ValidateDetails passwordObj = (passwordPassed) -> {
+			if (passwordPassed.matches(PASSWORD_PATTERN))
+				return true;
+			else
+				return false;
+		};
+		if (passwordObj.validateDetails(password))
+			System.out.println("Your Password is following the correct format required: " + password);
+		else
+			System.out.println("The pattern of Password is incorrect. Please try again!");
 
 		System.out.println("Registered Successfully!");
 	}
