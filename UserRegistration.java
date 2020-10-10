@@ -22,77 +22,47 @@ public class UserRegistration {
 		System.out.println("Welcome to User Registration");
 
 		Scanner sc = new Scanner(System.in);
-		
-		//First Name Validation Using Lambda Expression
+
+		// First Name Validation Using Lambda Expression
 		System.out.println("Enter Your First Name for User Registration :");
 		String firstName = sc.nextLine();
-		ValidateDetails firstNameObj = (firstNamePassed) -> {
-			if (firstNamePassed.matches(FIRST_NAME_PATTERN))
-				return true;
-			else
-				return false;
-		};
-		if (firstNameObj.validateDetails(firstName))
-			System.out.println("First Name : " + firstName);
-		else
-			System.out.println("Enter correct First name");
-		
-		//Last Name Validation Using Lambda Expression
+		validateDetails(firstName, FIRST_NAME_PATTERN);
+
+		// Last Name Validation Using Lambda Expression
 		System.out.println("Enter Your Last Name for User Registration :");
 		String lastName = sc.nextLine();
-		ValidateDetails lastNameObj = (lastNamePassed) -> {
-			if (lastNamePassed.matches(LAST_NAME_PATTERN))
-				return true;
-			else
-				return false;
-		};
-		if (lastNameObj.validateDetails(lastName))
-			System.out.println("Last Name : " + firstName);
-		else
-			System.out.println("The pattern of Last Name is incorrect. Please try again!");
-		
-		//Email Id Validation Using Lambda Expression
+		validateDetails(lastName, LAST_NAME_PATTERN);
+
+		// Email Id Validation Using Lambda Expression
 		System.out.println("Enter Your Email ID for User Registration :");
 		String emailId = sc.nextLine();
-		ValidateDetails emailIdObj = (emailIdPassed) -> {
-			if (emailIdPassed.matches(EMAIL_PATTERN))
-				return true;
-			else
-				return false;
-		};
-		if (emailIdObj.validateDetails(emailId))
-			System.out.println("Entered email id is : " + emailId);
-		else
-			System.out.println("The pattern of Email Id is incorrect. Please try again!");
-		
-		//Phone Number Validation Using Lambda Expression
+		validateDetails(emailId, EMAIL_PATTERN);
+
+		// Phone Number Validation Using Lambda Expression
 		System.out.println("Enter Your Phone Number for User Registration :");
 		String phoneNo = sc.nextLine();
-		ValidateDetails phoneNoObj = (phoneNoPassed) -> {
-			if (phoneNoPassed.matches(PHONE_NUMBER_PATTERN))
-				return true;
-			else
-				return false;
-		};
-		if (phoneNoObj.validateDetails(phoneNo))
-			System.out.println("Your Phone Number provided is : " + phoneNo);
-		else
-			System.out.println("The pattern of Phone Number is incorrect. Please try again!");
-		
-		//Password Validation Using Lambda Expression
+		validateDetails(phoneNo, PHONE_NUMBER_PATTERN);
+
+		// Password Validation Using Lambda Expression
 		System.out.println("Enter Your Password for User Registration :");
 		String password = sc.nextLine();
-		ValidateDetails passwordObj = (passwordPassed) -> {
-			if (passwordPassed.matches(PASSWORD_PATTERN))
+		validateDetails(password, PASSWORD_PATTERN);
+
+		System.out.println("Registered Successfully!");
+		sc.close();
+	}
+
+	// Lambda expression to validate all the details
+	private static void validateDetails(String parameter, String pattern) {
+		ValidateDetails parameterObj = (parameterPassed) -> {
+			if (parameterPassed.matches(pattern))
 				return true;
 			else
 				return false;
 		};
-		if (passwordObj.validateDetails(password))
-			System.out.println("Your Password is following the correct format required: " + password);
+		if (parameterObj.validateDetails(parameter))
+			System.out.println("Your Detail provided is accepted : " + parameter);
 		else
-			System.out.println("The pattern of Password is incorrect. Please try again!");
-
-		System.out.println("Registered Successfully!");
+			System.out.println("The detail provided is not in correct format. Please try again!");
 	}
 }

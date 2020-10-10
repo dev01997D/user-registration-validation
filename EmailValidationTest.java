@@ -9,22 +9,22 @@ import org.junit.Before;
 import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.junit.runners.Parameterized;
-import org.junit.runners.Suite;
-import org.junit.runners.Suite.SuiteClasses;
+//import org.junit.runners.Suite;
+//import org.junit.runners.Suite.SuiteClasses;
 
-import com.bz.userregistration.EmailValidationMain;
+import com.bz.userregistration.UserRegistrationMain;
 
 @RunWith(Parameterized.class)
-@SuiteClasses({ UserRegistrationTest.class })
+//@SuiteClasses({ UserRegistrationTest.class })
 
 public class EmailValidationTest {
 	private String inputString;
 	private Boolean expectedResult;
-	private EmailValidationMain emailValidationMain;
+	private UserRegistrationMain userMain;
 
 	@Before
 	public void initialize() {
-		emailValidationMain = new EmailValidationMain();
+		userMain = new UserRegistrationMain();
 	}
 	//Constructor
 	public EmailValidationTest(String inputString, Boolean expectedResult) {
@@ -32,8 +32,9 @@ public class EmailValidationTest {
 		this.expectedResult = expectedResult;
 	}
 	@Parameterized.Parameters
-	public static Collection emailIds() {
-		return Arrays.asList(new Object[][] {
+	public static Collection<Object []> emailIds() {
+		return Arrays.asList(new Object[][] 
+				{
 			{ "abc-100@yahoo.com", true },
 			{ "abc@yahoo.com", true },
 			{ "abc.100@yahoo.com", true },
@@ -50,6 +51,6 @@ public class EmailValidationTest {
 	@Test
 	public void testEmailIds() {
 		System.out.println("Parameterized Input Email Id is : " + inputString);
-		assertEquals(expectedResult, emailValidationMain.emailValidation(inputString));
+		assertEquals(expectedResult, userMain.emailValidation(inputString));
 	}
 }
