@@ -1,8 +1,6 @@
 package com.bz.userregistration;
 
 import java.util.Scanner;
-import java.util.regex.Matcher;
-import java.util.regex.Pattern;
 
 public class UserRegistration {
 	// Constants
@@ -26,34 +24,34 @@ public class UserRegistration {
 		// First Name Validation Using Lambda Expression
 		System.out.println("Enter Your First Name for User Registration :");
 		String firstName = sc.nextLine();
-		validateDetails(firstName, FIRST_NAME_PATTERN);
+		validateDetails(firstName, FIRST_NAME_PATTERN, "First Name");
 
 		// Last Name Validation Using Lambda Expression
 		System.out.println("Enter Your Last Name for User Registration :");
 		String lastName = sc.nextLine();
-		validateDetails(lastName, LAST_NAME_PATTERN);
+		validateDetails(lastName, LAST_NAME_PATTERN, "Last Name");
 
 		// Email Id Validation Using Lambda Expression
 		System.out.println("Enter Your Email ID for User Registration :");
 		String emailId = sc.nextLine();
-		validateDetails(emailId, EMAIL_PATTERN);
+		validateDetails(emailId, EMAIL_PATTERN, "Email ID");
 
 		// Phone Number Validation Using Lambda Expression
 		System.out.println("Enter Your Phone Number for User Registration :");
 		String phoneNo = sc.nextLine();
-		validateDetails(phoneNo, PHONE_NUMBER_PATTERN);
+		validateDetails(phoneNo, PHONE_NUMBER_PATTERN, "Phone Number");
 
 		// Password Validation Using Lambda Expression
 		System.out.println("Enter Your Password for User Registration :");
 		String password = sc.nextLine();
-		validateDetails(password, PASSWORD_PATTERN);
+		validateDetails(password, PASSWORD_PATTERN, "Password");
 
 		System.out.println("Registered Successfully!");
 		sc.close();
 	}
 
 	// Lambda expression to validate all the details
-	private static void validateDetails(String parameter, String pattern) {
+	private static void validateDetails(String parameter, String pattern, String detailName) {
 		ValidateDetails parameterObj = (parameterPassed) -> {
 			if (parameterPassed.matches(pattern))
 				return true;
@@ -61,8 +59,8 @@ public class UserRegistration {
 				return false;
 		};
 		if (parameterObj.validateDetails(parameter))
-			System.out.println("Your Detail provided is accepted : " + parameter);
+			System.out.println("Your "+ detailName + " provided is accepted : " + parameter);
 		else
-			System.out.println("The detail provided is not in correct format. Please try again!");
+			System.out.println("The "+ detailName +" provided is not in correct format. Please try again!");
 	}
 }
